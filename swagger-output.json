@@ -112,35 +112,36 @@
     },
     "/hotels/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Hotels"
+        ],
+        "description": "Gets the list of all available hotels.",
+        "produces": [
+          "text/html"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Hotels"
+        ],
+        "description": "Creates a new hotel.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "Name": {
-                  "example": "any"
-                },
-                "Location": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Hotel"
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       },
@@ -346,6 +347,25 @@
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "Hotel": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "example": "Street Hotel"
+        },
+        "Location": {
+          "type": "string",
+          "example": "Chicago"
+        }
+      },
+      "required": [
+        "Name",
+        "Location"
+      ]
     }
   }
 }
