@@ -5,6 +5,8 @@ var jsonParser = bodyParser.json()
 var HotelService = require("../services/HotelService")
 var db = require("../models");
 var hotelService = new HotelService(db);
+var createError = require('http-errors');
+
 /* GET hotels listing. */
 router.get('/', async function(req, res, next) {
   // #swagger.tags = ['Hotels']
@@ -38,6 +40,10 @@ router.post('/', jsonParser, async function(req, res, next) {
       }
     }
   */
+ //👇Adds endpoint validation
+  if(req.body.Name == null || req.body.Location == null) {
+    next(createError(400, 'Both Name and Location need to be provided in the request'));
+  }
   let Name = req.body.Name;
   let Location = req.body.Location;
   await hotelService.create(Name, Location);
